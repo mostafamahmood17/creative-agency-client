@@ -1,0 +1,19 @@
+.backgroundDesign{
+    background-color: #FBD062;
+    position: relative;
+    width: 100%;
+    
+   
+}
+.backgroundDesign::after{
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: inherit;
+    z-index: -50;
+    bottom: 0;
+    transform-origin: right bottom;
+    transform: skewY(-3deg);
+  }
+
