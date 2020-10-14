@@ -7,9 +7,7 @@ const ClientReview = () => {
     const [info, setInfo] = useState({});
     
     
-    const handleBlur = e => {
-        
-       
+    const handleBlur = e => {   
         const newInfo = { ...info };
         newInfo[e.target.name] = e.target.value;
         setInfo(newInfo);

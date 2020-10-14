@@ -30,7 +30,7 @@ const AddAdmin = () => {
                         <form style={{height:"100vh", width:"100%"}} className="bg-light p-5 rounded"> 
                         <div >
                             <div className="form-group bg-white" >
-                                <label for="email">Email address</label>
+                                <label htmlFor="email">Email address</label>
                                 <input type="email" class="form-control" id="email" placeholder="Enter email for new admin" />
 
                             </div>
