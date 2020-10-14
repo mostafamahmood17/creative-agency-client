@@ -5,7 +5,7 @@ import logo from '../../../images/logos/logo.png'
 import Sidebar from '../Sidebar/Sidebar';
 
 const ServicesAdd = () => {
-    const [loggedInUser, setLoggedInUser] = useContext(AgencyContext)
+    const {loggedInUser, setLoggedInUser} = useContext(AgencyContext)
     const inputStyle = { 
         height:"120px",
         width:"180px",
@@ -42,8 +42,8 @@ const ServicesAdd = () => {
                     <div className="col-lg-8 col-sm-12">
                     <h1>Add Service</h1>
                     <form onSubmit={submitHandler} className="bg-light p-5 rounded">
-                       <div className='row'>
-                        <div className="col bg-white p-3 rounded">
+                       <div className='row bg-white'>
+                        <div className="col rounded">
                             <div className="col-6">
                               <h4>Service Title</h4>
                               <input type="text" id ="name" placeholder="Title" name="name"/>

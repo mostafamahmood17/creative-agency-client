@@ -5,7 +5,7 @@ import logo from '../../../images/logos/logo.png'
 import Sidebar from '../Sidebar/Sidebar';
 
 const AdminDashboard = () => {
-    const [loggedInUser, setLoggedInUser] = useContext(AgencyContext)
+    const {loggedInUser, setLoggedInUser} = useContext(AgencyContext)
     return (
         <div>
 

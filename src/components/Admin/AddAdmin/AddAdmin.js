@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AgencyContext } from '../../../App';
-import logo from '../../../images/logos/logo.png'
+
 import Sidebar from '../Sidebar/Sidebar';
 
 const AddAdmin = () => {
-    const [loggedInUser, setLoggedInUser] = useContext(AgencyContext)
+    const {loggedInUser, setLoggedInUser} = useContext(AgencyContext)
 
    
     return (

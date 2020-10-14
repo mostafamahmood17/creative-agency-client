@@ -30,7 +30,7 @@ const Footer = () => {
 
                         </div>
                     </div>
-                    <div class=" text-center py-3">© 2020 Copyright: Creative Agency
+                    <div class=" text-center py-3">© {(new Date()).getFullYear()} Copyright: Creative Agency
   </div>
             </footer>
         </div>

@@ -7,7 +7,7 @@ import { AgencyContext } from '../../App';
 import logo from '../../images/logos/logo.png';
 
 const Login = () => {
-    const [loggedInUser, setLoggedInUser] = useContext(AgencyContext);
+    const {loggedInUser, setLoggedInUser} = useContext(AgencyContext);
     const history = useHistory();
     const location = useLocation();
     const { from } = location.state || { from: { pathname: "/" } };
@@ -19,9 +19,10 @@ const Login = () => {
         var provider = new firebase.auth.GoogleAuthProvider();
 
         firebase.auth().signInWithPopup(provider).then(function (result) {
+            console.log(result.user.photoURL)
 
-            const { displayName, email } = result.user;
-            const signedInUser = { name: displayName, email }
+            const { displayName, email, photoURL} = result.user;
+            const signedInUser = { name: displayName, email, image: photoURL }
             setLoggedInUser(signedInUser);
             history.replace(from);
         }).catch(function (error) {

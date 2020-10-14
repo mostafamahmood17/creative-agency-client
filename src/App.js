@@ -8,8 +8,12 @@ import {
 import AddAdmin from './components/Admin/AddAdmin/AddAdmin';
 import AdminDashboard from './components/Admin/AdminDashboard/AdminDashboard';
 import ServicesAdd from './components/Admin/ServicesAdd/ServicesAdd';
+import ClientOrder from './components/Client/ClientOrder/ClientOrder';
+import ClientReview from './components/Client/ClientOrder/ClientReview/ClientReview';
+import ClientServiceList from './components/Client/ClientOrder/ClientServiceList/ClientServiceList';
 import Home from './components/Home/Home/Home';
 import Login from './components/Login/Login';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
 
 export const AgencyContext = createContext();
@@ -17,7 +21,7 @@ export const AgencyContext = createContext();
 function App() {
   const [loggedInUser, setLoggedInUser] = useState({});
   return (
-    <AgencyContext.Provider value={[loggedInUser, setLoggedInUser]}>
+    <AgencyContext.Provider value={{loggedInUser, setLoggedInUser}}>
 
       <Router>
 
@@ -32,10 +36,19 @@ function App() {
           <Route path="/ServicesAdd">
             <ServicesAdd></ServicesAdd>
           </Route>
-         
           <Route path="/admin">
             <AdminDashboard></AdminDashboard>
           </Route>
+          <PrivateRoute path="/clientOrder">
+            <ClientOrder></ClientOrder>
+          </PrivateRoute>
+          <Route path="/clientServiceList">
+          <ClientServiceList></ClientServiceList>
+          </Route>
+          <Route path="/review">
+          <ClientReview></ClientReview>
+          </Route>
+          
           <Route exact path="/">
             <Home></Home>
           </Route>
