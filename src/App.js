@@ -45,9 +45,9 @@ function App() {
           <Route path="/clientServiceList">
           <ClientServiceList></ClientServiceList>
           </Route>
-          <Route path="/review">
+          <PrivateRoute path="/review">
           <ClientReview></ClientReview>
-          </Route>
+          </PrivateRoute>
           
           <Route exact path="/">
             <Home></Home>

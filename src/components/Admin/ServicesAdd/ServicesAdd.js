@@ -1,11 +1,28 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AgencyContext } from '../../../App';
 import logo from '../../../images/logos/logo.png'
 import Sidebar from '../Sidebar/Sidebar';
 
 const ServicesAdd = () => {
-    const {loggedInUser, setLoggedInUser} = useContext(AgencyContext)
+    const {loggedInUser, setLoggedInUser} = useContext(AgencyContext);
+    const [info, setInfo] = useState({});
+    const [file, setFile] = useState(null);
+   
+   
+    const handleBlur = (e) => {
+    const newInfo = { ...info };
+    newInfo[e.target.name] = e.target.value;
+    setInfo(newInfo);
+    }
+
+
+const handleFileChange = (e) => {
+    const newFile = e.target.files[0];
+    setFile(newFile);
+}
+
+
     const inputStyle = { 
         height:"120px",
         width:"180px",
@@ -27,7 +44,7 @@ const ServicesAdd = () => {
     .then(res =>res.json())
     .then(data => {
         console.log(data);
-        alert("Event Created");
+        alert("Service Created");
     })
 
 }
@@ -46,11 +63,11 @@ const ServicesAdd = () => {
                         <div className="col rounded">
                             <div className="col-6">
                               <h4>Service Title</h4>
-                              <input type="text" id ="name" placeholder="Title" name="name"/>
+                              <input onBlur={handleBlur} type="text" id ="name" placeholder="Title" name="name"/>
                             </div>
                             <div className="col-6">
                             <h3>Description</h3>
-                            <input style={inputStyle} type="text" id ="description" placeholder="Description" name="description"/>
+                            <input onBlur={handleBlur} style={inputStyle} type="text" id ="description" placeholder="Description" name="description"/>
                             </div>
                         </div>
 
@@ -58,7 +75,7 @@ const ServicesAdd = () => {
                            
                             <div className="col-4">
                             <h3>Image</h3>
-                            <input type="file"/>
+                            <input onChange={handleFileChange} type="file"/>
                             </div>
     
                         </div>
