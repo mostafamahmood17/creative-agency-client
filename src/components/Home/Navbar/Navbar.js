@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AgencyContext } from '../../../App';
 import logo from "../../../images/logos/logo.png"
 
 const Navbar = () => {
+    const {loggedInUser, setLoggedInUser} = useContext(AgencyContext);
     return (
         <div className="container">
             <nav className="navbar navbar-expand-lg navbar-light bg-transparent">
@@ -23,10 +25,16 @@ const Navbar = () => {
                             <Link to="/" style={{textWrap:"wrap"}}className="nav-link d-block">Our Team</Link>
                         </li>
                         <li className="nav-item pr-3">
-                            <Link to="/" className="nav-link">Contact Us</Link>
+                            <Link to="/clientOrder" className="nav-link">Dashboard</Link>
                         </li>
                         <li className="nav-item pr-3">
-                            <button className="btn btn-dark"><Link to="/login" className="nav-link text-white">Login</Link></button>
+                            {
+                                loggedInUser.email ?
+                                        <li>{loggedInUser.name}</li> 
+                                : 
+                                      <button className="btn btn-dark"><Link to="/login" className="nav-link text-white">Login</Link></button>
+                            }
+                      
                         </li>
                        
                     </ul>

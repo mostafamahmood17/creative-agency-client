@@ -1,17 +1,16 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { AgencyContext } from '../../../App';
-import logo from '../../../images/logos/logo.png'
 import Sidebar from '../Sidebar/Sidebar';
 
 const ServicesAdd = () => {
     const { loggedInUser, setLoggedInUser } = useContext(AgencyContext);
     const [info, setInfo] = useState({});
     const [file, setFile] = useState(null);
+   
 
 
     const handleBlur = (e) => {
-        const newInfo = { ...info };
+        const newInfo = { ...info};
         newInfo[e.target.name] = e.target.value;
         setInfo(newInfo);
     }
@@ -35,8 +34,8 @@ const ServicesAdd = () => {
         const formData = new FormData()
         formData.append('file', file)
         formData.append('name', info.name)
-        // formData.append('email', info.email)
         formData.append('description', info.description)
+  
       
         fetch('http://localhost:5000/addServices', {
           method: 'POST',
@@ -46,6 +45,8 @@ const ServicesAdd = () => {
         .then(response => response.json())
         .then(data => {
           console.log(data)
+          alert("File submited");
+          
         })
         .catch(error => {
           console.error(error)
@@ -68,13 +69,13 @@ const ServicesAdd = () => {
                                         <label htmlFor="name">Service Title</label>
                                         <input onBlur={handleBlur} type="text" id="name" placeholder="Title" name="name" />
                                     </div>
+                   
                                     
                                     <div className="col-6 from-group">
                                         <label htmlFor="description">Description</label>
                                         <input onBlur={handleBlur} style={inputStyle} type="text" id="description" placeholder="description" name="description" />
                                     </div>
                                 </div>
-
                                 <div className="col">
 
                                     <div className="col-4 from-group">
@@ -83,8 +84,9 @@ const ServicesAdd = () => {
                                             
                                         
                                         <input onChange={handleFileChange} type="file" id="file" placeholder="picture"/>
+                                        
                                     </div>
-
+                                    
                                 </div>
                                 <div className="m-3 col-md-12">
                                     <button className="btn btn-primary" type="submit">Submit</button>

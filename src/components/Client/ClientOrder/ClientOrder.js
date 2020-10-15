@@ -1,7 +1,63 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
+import { AgencyContext } from '../../../App';
 import Sidebar from '../../Admin/Sidebar/Sidebar';
 
 const ClientOrder = () => {
+    const {loggedInUser, setLoggedInUser} = useContext(AgencyContext)
+    const [orderDetail, setOrderDetail] = useState({});
+    const [serviceFind, setServiceFind] = useState({});
+    const {_id} = useParams();
+    const history = useHistory();
+    console.log(_id)
+    
+
+    useEffect(() => {
+        fetch('http://localhost:5000/services')
+            .then(res => res.json())
+            .then(data => {   
+                findService(data)
+            })
+            
+    }, [])
+    
+    const findService = (service) =>{
+        const job = service.find(serv => serv._id == _id);
+        setServiceFind(job)
+        console.log(job)
+    }
+
+   
+    console.log(serviceFind)
+
+    const handleBlur = e => {   
+        const detail = {...orderDetail};
+        detail[e.target.name] = e.target.value;
+        setOrderDetail(detail);
+        
+    }
+
+    const submitHandler = (e) =>{
+        e.preventDefault();
+        const email = loggedInUser.email;
+        const newDetail = {...orderDetail, email}
+        console.log("get",orderDetail, email);
+
+        fetch('http://localhost:5000/orderInfo',{
+            method: 'POST',
+            headers: {'Content-Type' : 'application/json'},
+            body: JSON.stringify(newDetail)
+    })
+    .then(res =>res.json())
+    .then(data => {
+        console.log(data);
+        history.push('/clientServiceList');
+
+    })
+
+}
+
+  
     return (
         <div>
             <div className="container mt-2">
@@ -11,22 +67,31 @@ const ClientOrder = () => {
                     </div>
                     <div className="col-lg-8 col-sm-12">
                     <h1>Order</h1>
-                    <form>
+                    <form onSubmit={submitHandler}>
                         <div className="form-group">
-                            <input type="text" className="form-control" name="name" placeholder="Your name / company’s name" />
+                            <input onBlur={handleBlur} type="text" className="form-control" name="name" placeholder="Your name / company’s name" required />
                         </div>
                         <div className="form-group">
-                            <input type="email" className="form-control" name="email" placeholder="Your email address" />
+                            <input type="email" className="form-control" name="email" defaultValue={loggedInUser.email} />
                         </div>
                         <div className="form-group">
-                            <input type="text" className="form-control" name="project name" placeholder="Graphics Design" />
+                            {serviceFind ?
+                            <input type="text" className="form-control" defaultValue={serviceFind.name} name="projectName" />
+                            :
+                            <input type="text" onBlur={handleBlur} className="form-control" name="projectName" placeholder="Project Name"  required/>
+                             }
                         </div>
                         <div className="form-group">
-                            <input type="text" className="form-control" name="description" placeholder="Project Details" />
+                            {serviceFind ?
+                                <input type="text" className="form-control" defaultValue={serviceFind.description} name="description" />
+                                :
+                                <input type="text" onBlur={handleBlur} className="form-control" name="description" placeholder="description" required/>
+                             }
                         </div>
+                       
 
                         <div className="form-group">
-                            <input type="text" className="form-control" name="name" placeholder="Price" />
+                            <input onBlur={handleBlur} type="text" className="form-control" name="price" placeholder="Price" required/>
                             <br/>
                             <input type="file" className="form-control" placeholder="Picture" />
                         </div>

@@ -17,16 +17,13 @@ const ClientReview = () => {
         e.preventDefault();
         const name =loggedInUser.name;
         const image = loggedInUser.image;
-        // const name = document.getElementById("name").value;
-        // const description = document.getElementById("description").value;
-        // const image = document.getElementById("image").value;
-        const newInfo = {...info,name, image};
+        const newDoc = {...info, name, image};
        
         
         fetch('http://localhost:5000/addReviews', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(newInfo)
+            body: JSON.stringify(newDoc)
         })
     .then(res =>res.json())
     .then(data => {
@@ -49,13 +46,13 @@ const ClientReview = () => {
                         <form onSubmit={submitHandler}>
 
                             <div className="form-group">
-                                <input type="text" className="form-control" name="name" placeholder={loggedInUser.name}/>
+                                <input type="text" className="form-control" name="name" defaultValue={loggedInUser.name}/>
                             </div>
                             <div className="form-group">
-                                <input onBlur={handleBlur} type="text" className="form-control" name="companyName" placeholder="Company’s name, Designation" />
+                                <input onBlur={handleBlur} type="text" className="form-control" name="companyName" placeholder="Company’s name, Designation" required/>
                             </div>
                             <div className="form-group">
-                                <input onBlur={handleBlur} type="text" className="form-control" name="Description" placeholder="Description" />
+                                <input onBlur={handleBlur} type="text" className="form-control" name="Description" placeholder="Description" required/>
                             </div>
                             <div className="form-group">
                                 <input type="text" className="form-control d-none" name="image" placeholder={loggedInUser.image}/>

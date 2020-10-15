@@ -13,6 +13,7 @@ import ClientReview from './components/Client/ClientOrder/ClientReview/ClientRev
 import ClientServiceList from './components/Client/ClientOrder/ClientServiceList/ClientServiceList';
 import Home from './components/Home/Home/Home';
 import Login from './components/Login/Login';
+import NotMatch from './components/NotMatch/NotMatch';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
 
@@ -20,6 +21,7 @@ export const AgencyContext = createContext();
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState({});
+  
   return (
     <AgencyContext.Provider value={{loggedInUser, setLoggedInUser}}>
 
@@ -30,27 +32,36 @@ function App() {
           <Route path="/login">
             <Login></Login>
           </Route>
-          <Route path="/addadmin">
+          <PrivateRoute path="/addadmin">
             <AddAdmin></AddAdmin>
-          </Route>
-          <Route path="/ServicesAdd">
+          </PrivateRoute>
+          <PrivateRoute path="/ServicesAdd">
             <ServicesAdd></ServicesAdd>
-          </Route>
-          <Route path="/admin">
+          </PrivateRoute>
+          <PrivateRoute path="/order/:_id">
+            <ClientOrder></ClientOrder>
+          </PrivateRoute>
+          <PrivateRoute path="/admin">
             <AdminDashboard></AdminDashboard>
-          </Route>
+          </PrivateRoute>
           <PrivateRoute path="/clientOrder">
             <ClientOrder></ClientOrder>
           </PrivateRoute>
-          <Route path="/clientServiceList">
+          <PrivateRoute path="/clientServiceList">
           <ClientServiceList></ClientServiceList>
-          </Route>
+          </PrivateRoute>
           <PrivateRoute path="/review">
           <ClientReview></ClientReview>
           </PrivateRoute>
+          <Route exact path="/home">
+            <Home></Home>
+          </Route>
           
           <Route exact path="/">
             <Home></Home>
+          </Route>
+          <Route exact path="*">
+            <NotMatch></NotMatch>
           </Route>
 
         </Switch>

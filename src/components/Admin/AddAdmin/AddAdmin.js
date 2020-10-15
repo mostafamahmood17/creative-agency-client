@@ -1,11 +1,38 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AgencyContext } from '../../../App';
 
 import Sidebar from '../Sidebar/Sidebar';
 
 const AddAdmin = () => {
-    const {loggedInUser, setLoggedInUser} = useContext(AgencyContext)
+    const {loggedInUser, setLoggedInUser} = useContext(AgencyContext);
+    const [admin, setAdmin] = useState();
+    const handleBlur = (e) => {
+        const newAdmin= { ...admin};
+        newAdmin[e.target.name] = e.target.value;
+        setAdmin(newAdmin);
+    }
+
+    const handleSubmit = (e) =>{
+        e.preventDefault();
+        const newAdminEmail = {...admin};
+         
+        fetch('http://localhost:5000/createAdmin',{
+            method: 'POST',
+            headers: {'Content-Type' : 'application/json'},
+            body: JSON.stringify(newAdminEmail)
+    })
+    .then(res =>res.json())
+    .then(data => {
+        console.log(data);
+        alert("admin created")
+       
+
+    })
+       
+    }
+
+
 
    
     return (
@@ -27,11 +54,11 @@ const AddAdmin = () => {
                                 {loggedInUser && <h3>{loggedInUser.name}</h3>}
                             </div>
                         </div>
-                        <form style={{height:"100vh", width:"100%"}} className="bg-light p-5 rounded"> 
+                        <form onSubmit={handleSubmit} style={{height:"100vh", width:"100%"}} className="bg-light p-5 rounded"> 
                         <div >
                             <div className="form-group bg-white" >
                                 <label htmlFor="email">Email address</label>
-                                <input type="email" class="form-control" id="email" placeholder="Enter email for new admin" />
+                                <input onBlur={handleBlur} type="email" className="form-control" name="email" id="email" placeholder="Enter email for new admin" required/>
 
                             </div>
 
