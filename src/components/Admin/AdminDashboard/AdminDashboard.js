@@ -9,7 +9,7 @@ const AdminDashboard = () => {
 
     const [allOrder, setAllOrder] = useState([])
     useEffect(() => {
-        fetch('http://localhost:5000/allOrder')
+        fetch(`http://localhost:5000/allOrder/${loggedInUser.email}`)
             .then(res => res.json())
             .then(data => setAllOrder(data))
     }, [])

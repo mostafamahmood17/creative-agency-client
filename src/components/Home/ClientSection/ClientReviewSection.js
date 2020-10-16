@@ -9,7 +9,7 @@ const ClientReviewSection = (props) => {
                     <div className="col mb-5" >
                         <div className="d-flex justify-content-start">
                             <div>
-                                <img src={image} style={{width:"80px"}} alt="" />
+                                <img src={image} style={{width:"80px"}} alt=""/>
                             </div>
                             <div className="ml-4 ">
                                 <h3>{name}</h3>
@@ -17,7 +17,7 @@ const ClientReviewSection = (props) => {
                             </div>
                         </div>
                         <div>
-                          <marquee className="mt-4 text-secondary" style={{whiteSpace: "noWrap", overflow: "hidden", textOverflow: "ellipsis"}}>{Description}</marquee>
+                          <p className="mt-4 text-secondary" style={{whiteSpace: "noWrap", overflow: "hidden", textOverflow: "ellipsis"}}>{Description}</p>
                     </div>
                        
                     </div>

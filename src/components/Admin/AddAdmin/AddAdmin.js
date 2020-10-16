@@ -63,7 +63,7 @@ const AddAdmin = () => {
                             </div>
 
 
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" className="btn btn-primary">Submit</button>
                             </div>
                         </form>
 

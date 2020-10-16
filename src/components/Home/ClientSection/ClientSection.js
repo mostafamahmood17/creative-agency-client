@@ -13,12 +13,14 @@ const ClientSection = () => {
 
     return (
         <div className="container mt-5">
+            
             <h3 className="text-center mb-5">Clients<span style={{ color: "#7AB259" }}>Feedback</span></h3>
             <div className="row">
                 {
                     review.map(reviews => <ClientReviewSection key={reviews._id} reviews={reviews}></ClientReviewSection>)     
                 }
             </div>
+          
         </div>
     );
 };

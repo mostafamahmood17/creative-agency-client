@@ -25,12 +25,12 @@ const Navbar = () => {
                             <Link to="/" style={{textWrap:"wrap"}}className="nav-link d-block">Our Team</Link>
                         </li>
                         <li className="nav-item pr-3">
-                            <Link to="/clientOrder" className="nav-link">Dashboard</Link>
+                            <Link to="/admin" className="nav-link">Admin</Link>
                         </li>
                         <li className="nav-item pr-3">
                             {
                                 loggedInUser.email ?
-                                        <li>{loggedInUser.name}</li> 
+                                        <button className="btn text-dark">{loggedInUser.name}</button>
                                 : 
                                       <button className="btn btn-dark"><Link to="/login" className="nav-link text-white">Login</Link></button>
                             }

@@ -1,16 +1,22 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AgencyContext } from '../../../App';
 import Sidebar from '../Sidebar/Sidebar';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCloudUploadAlt, faCoffee } from '@fortawesome/free-solid-svg-icons'
 
 const ServicesAdd = () => {
     const { loggedInUser, setLoggedInUser } = useContext(AgencyContext);
     const [info, setInfo] = useState({});
     const [file, setFile] = useState(null);
-   
+    // const [statuss, setStatuss] = useState("");
+
+
+
+
 
 
     const handleBlur = (e) => {
-        const newInfo = { ...info};
+        const newInfo = { ...info };
         newInfo[e.target.name] = e.target.value;
         setInfo(newInfo);
     }
@@ -30,28 +36,40 @@ const ServicesAdd = () => {
 
     const submitHandler = (e) => {
         e.preventDefault();
+        const doc = document.getElementById("status").value
+        console.log(doc)
 
         const formData = new FormData()
         formData.append('file', file)
         formData.append('name', info.name)
         formData.append('description', info.description)
-  
-      
+        formData.append('upd', doc)
+        console.log(doc)
+
+
         fetch('http://localhost:5000/addServices', {
-          method: 'POST',
-          body: formData
-          
+            method: 'POST',
+            body: formData
+
         })
-        .then(response => response.json())
-        .then(data => {
-          console.log(data)
-          alert("File submited");
-          
-        })
-        .catch(error => {
-          console.error(error)
-        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                alert("File submited");
+
+            })
+            .catch(error => {
+                console.error(error)
+            })
     }
+
+    const buttonSize = {
+        width: "100px",
+
+
+    }
+
+   
     return (
         <div>
 
@@ -66,30 +84,40 @@ const ServicesAdd = () => {
                             <div className='row bg-white'>
                                 <div className="col rounded">
                                     <div className="col-6 from-group">
-                                        <label htmlFor="name">Service Title</label>
-                                        <input onBlur={handleBlur} type="text" id="name" placeholder="Title" name="name" />
+                                        <label htmlFor="name" className="font-weight-bold">Service Title</label>
+                                        <input onBlur={handleBlur} type="text" id="name" placeholder="Title" name="name" required />
                                     </div>
-                   
-                                    
+
+
                                     <div className="col-6 from-group">
-                                        <label htmlFor="description">Description</label>
-                                        <input onBlur={handleBlur} style={inputStyle} type="text" id="description" placeholder="description" name="description" />
+                                        <label htmlFor="description" className="font-weight-bold">Description</label>
+                                        <input name="file" onBlur={handleBlur} style={inputStyle} type="text" id="description" placeholder="description" name="description" required />
+
                                     </div>
+                                    <input className="" type="text" id="status" defaultValue="pending" name="upd"/>
+
+
+
                                 </div>
                                 <div className="col">
 
                                     <div className="col-4 from-group">
+
+                                        <label htmlFor="file" className="font-weight-bold">Upload Image</label>
+
+                                        {/* <button style={buttonSize} width="150px" className="btn btn-outline-success d-flex justify-content-around">
+                                            <input onChange={handleFileChange} className="d-none text-nowrap" id="file" type="file" />
+                                            <FontAwesomeIcon className="mt-1" icon={faCloudUploadAlt} />
+                                            <span className="pl-1">Upload</span>
+                                        </button> */}
+                                         <input className="btn btn-outline-success" onChange={handleFileChange} type="file" id="file" placeholder="picture" required/>
                                         
-                                            <label htmlFor="file">Upload Image</label>
-                                            
-                                        
-                                        <input onChange={handleFileChange} type="file" id="file" placeholder="picture"/>
-                                        
+
                                     </div>
-                                    
+
                                 </div>
                                 <div className="m-3 col-md-12">
-                                    <button className="btn btn-primary" type="submit">Submit</button>
+                                    <button className="btn btn-success" type="submit">Submit</button>
                                 </div>
                             </div>
                         </form>
@@ -109,18 +137,3 @@ const ServicesAdd = () => {
 export default ServicesAdd;
 
 
-// const name = document.getElementById("name").value;
-// const description = document.getElementById("description").value;
-// // const image = document.getElementById("image").value;
-// const info = { description, name };
-
-// fetch('http://localhost:5000/addServices', {
-//     method: 'POST',
-//     headers: { 'Content-Type': 'application/json' },
-//     body: JSON.stringify(info)
-// })
-//     .then(res => res.json())
-//     .then(data => {
-//         console.log(data);
-//         alert("Service Created");
-//     })

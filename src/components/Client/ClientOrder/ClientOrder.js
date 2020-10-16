@@ -9,7 +9,7 @@ const ClientOrder = () => {
     const [serviceFind, setServiceFind] = useState({});
     const {_id} = useParams();
     const history = useHistory();
-    console.log(_id)
+    
     
 
     useEffect(() => {
@@ -24,11 +24,9 @@ const ClientOrder = () => {
     const findService = (service) =>{
         const job = service.find(serv => serv._id == _id);
         setServiceFind(job)
-        console.log(job)
+        
     }
 
-   
-    console.log(serviceFind)
 
     const handleBlur = e => {   
         const detail = {...orderDetail};
@@ -40,8 +38,10 @@ const ClientOrder = () => {
     const submitHandler = (e) =>{
         e.preventDefault();
         const email = loggedInUser.email;
-        const newDetail = {...orderDetail, email}
-        console.log("get",orderDetail, email);
+        const projectName = serviceFind ? serviceFind.name : orderDetail.projectName;
+        const description = serviceFind ? serviceFind.description : orderDetail.description;
+        const newDetail = {...orderDetail, email, projectName, description}
+        console.log(newDetail)
 
         fetch('http://localhost:5000/orderInfo',{
             method: 'POST',
@@ -72,18 +72,18 @@ const ClientOrder = () => {
                             <input onBlur={handleBlur} type="text" className="form-control" name="name" placeholder="Your name / company’s name" required />
                         </div>
                         <div className="form-group">
-                            <input type="email" className="form-control" name="email" defaultValue={loggedInUser.email} />
+                            <input type="email" className="form-control" name="email" defaultValue={loggedInUser.email} required/>
                         </div>
                         <div className="form-group">
-                            {serviceFind ?
-                            <input type="text" className="form-control" defaultValue={serviceFind.name} name="projectName" />
+                        {serviceFind ? 
+                            <input type="text" className="form-control" defaultValue={serviceFind.name} required />
                             :
                             <input type="text" onBlur={handleBlur} className="form-control" name="projectName" placeholder="Project Name"  required/>
-                             }
+                         }
                         </div>
                         <div className="form-group">
                             {serviceFind ?
-                                <input type="text" className="form-control" defaultValue={serviceFind.description} name="description" />
+                                <input type="text" className="form-control" defaultValue={serviceFind.description} required/>
                                 :
                                 <input type="text" onBlur={handleBlur} className="form-control" name="description" placeholder="description" required/>
                              }

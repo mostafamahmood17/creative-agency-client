@@ -16,16 +16,16 @@ const ServiceWeProvide = ({ s }) => {
         return (
 
 
-                <div onClick={() => handleClick(s._id)} className="col-md-4" >
+                <div onClick={() => handleClick(s._id)}  className="col-md-4" >
                         <div>
                                
-                                {s.image ? <img className="img-fluid"  id='pictureOne'  src={`data:image/png;base64,${s.image.img}`} />
+                                {s.image ? <img className="img-fluid" id='pictureOne' src={`data:image/png;base64,${s.image.img}`} />
                                         :
-                                         <img className="img-fluid" id='pictureOne'  style={{ width: "50px" }} src={`http://localhost:5000/${s.img}`} alt="" />
+                                         <img className="img-fluid"  id='pictureOne' style={{ width: "50px" }} src={`http://localhost:5000/${s.img}`} alt="" />
                                 }
                         </div>
                         <h3>{s.name}</h3>
-                        <p>{s.description}</p>
+                        <p>{s.projectName}</p>
                 </div>
 
 
