@@ -1,8 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { AgencyContext } from '../../../App';
-import serviceOne from ".././../../images/icons/service1.png"
-import serviceTwo from ".././../../images/icons/service2.png"
-import serviceThree from ".././../../images/icons/service3.png"
+import React, { useEffect, useState } from 'react';
 import ServiceWeProvide from './ServiceWeProvide';
 
 const Services = () => {
@@ -18,7 +14,7 @@ const Services = () => {
             <div className="row text-center mt-5">
 
                 {
-                    service.map(s => <ServiceWeProvide key={s._id} s={s}></ServiceWeProvide>)
+                    service.map(ser => <ServiceWeProvide key={ser._id} ser={ser}></ServiceWeProvide>)
                 }
                 
             </div>

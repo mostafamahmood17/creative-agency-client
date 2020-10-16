@@ -1,7 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { AgencyContext } from '../../../App';
-import logo from '../../../images/logos/logo.png'
 import Sidebar from '../Sidebar/Sidebar';
 
 const AdminDashboard = () => {
@@ -12,8 +10,22 @@ const AdminDashboard = () => {
         fetch(`http://localhost:5000/allOrder/${loggedInUser.email}`)
             .then(res => res.json())
             .then(data => setAllOrder(data))
-    }, [])
+    }, [loggedInUser.email])
 
+    // const updateHandle = (event, id) => {
+    //     const updateProject = event.target.value
+    //     const newStatus = { id, updateProject }
+
+    //     fetch("http://localhost:5000/projectStatus", {
+    //         method: 'PATCH',
+    //         headers: { 'Content-Type': 'application/json' },
+    //         body: JSON.stringify(newStatus)
+    //     })
+    //         .then(res => res.json())
+    //         .then(result => {
+    //             console.log(result)
+    //         })
+    // }
 
     return (
         <div>
@@ -45,7 +57,7 @@ const AdminDashboard = () => {
                             </thead>
 
                             {allOrder.map(order =>
-                                <tbody>
+                                <tbody key={Math.random()}>
                                     <tr>
                                         <th scope="row">{order.name}</th>
                                         <td>{order.email}</td>
@@ -54,9 +66,9 @@ const AdminDashboard = () => {
 
                                         <td>
                                             <select>
-                                                <option className="text-danger" name="pending" id="">Pending</option>
-                                                <option className="text-warning" name="onGoing" id="">On going</option>
-                                                <option className="text-success" name="done" id="">Done</option>
+                                                    <option style={{ color: '#FF4545' }} name="pending"  value="pending" defaultValue id="">Pending</option>
+                                                    <option style={{ color: '#009444' }} name="on going" value="on going" id="">On going</option>
+                                                    <option style={{ color: '#009444' }} name="done" value="done" id="">Done</option>  
                                             </select>
                                         </td>
                                     </tr>

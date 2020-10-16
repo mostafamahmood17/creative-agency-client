@@ -11,7 +11,7 @@ const ClientServiceList = () => {
         fetch(`http://localhost:5000/order/${loggedInUser.email}`)
             .then(res => res.json())
             .then(data => setClientOrder(data))
-    }, [])
+    }, [loggedInUser.email])
 
     return (
         <div>
@@ -27,7 +27,7 @@ const ClientServiceList = () => {
                         <div className="">
 
                         {
-                            clientOrder.map(clientList => <ClientCompleteList key={clientList.name} clientList={clientList}></ClientCompleteList>)
+                            clientOrder.map(clientList => <ClientCompleteList key={Math.random()} clientList={clientList}></ClientCompleteList>)
                         }
                             
                         </div>

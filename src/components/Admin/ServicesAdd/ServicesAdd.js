@@ -1,19 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { AgencyContext } from '../../../App';
+import React, { useState } from 'react';
+
 import Sidebar from '../Sidebar/Sidebar';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCloudUploadAlt, faCoffee } from '@fortawesome/free-solid-svg-icons'
+
 
 const ServicesAdd = () => {
-    const { loggedInUser, setLoggedInUser } = useContext(AgencyContext);
     const [info, setInfo] = useState({});
     const [file, setFile] = useState(null);
-    // const [statuss, setStatuss] = useState("");
-
-
-
-
-
 
     const handleBlur = (e) => {
         const newInfo = { ...info };
@@ -36,15 +28,18 @@ const ServicesAdd = () => {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        const doc = document.getElementById("status").value
-        console.log(doc)
+        const doc = document.getElementById("status").value;
+        const pic = document.getElementById("pic").value
+        console.log(pic)
+        
 
         const formData = new FormData()
         formData.append('file', file)
         formData.append('name', info.name)
         formData.append('description', info.description)
         formData.append('upd', doc)
-        console.log(doc)
+        formData.append('pict', pic)
+       
 
 
         fetch('http://localhost:5000/addServices', {
@@ -63,11 +58,10 @@ const ServicesAdd = () => {
             })
     }
 
-    const buttonSize = {
-        width: "100px",
+    // const buttonSize = {
+    //     width: "100px",
 
-
-    }
+    // }
 
    
     return (
@@ -94,9 +88,9 @@ const ServicesAdd = () => {
                                         <input name="file" onBlur={handleBlur} style={inputStyle} type="text" id="description" placeholder="description" name="description" required />
 
                                     </div>
-                                    <input className="" type="text" id="status" defaultValue="pending" name="upd"/>
+                                    <input className="d-none" type="text" id="status" defaultValue="pending" name="upd" required/>
 
-
+                                    <input className="d-none" type="text" id="pic" defaultValue="https://imgur.com/8Y2reg0.png" name="pict" required/>
 
                                 </div>
                                 <div className="col">

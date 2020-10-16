@@ -2,8 +2,7 @@ import React, { createContext, useState } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 import AddAdmin from './components/Admin/AddAdmin/AddAdmin';
 import AdminDashboard from './components/Admin/AdminDashboard/AdminDashboard';
@@ -21,14 +20,14 @@ export const AgencyContext = createContext();
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState({});
-  
+
   return (
-    <AgencyContext.Provider value={{loggedInUser, setLoggedInUser}}>
+    <AgencyContext.Provider value={{ loggedInUser, setLoggedInUser }}>
 
       <Router>
 
         <Switch>
-        
+
           <Route path="/login">
             <Login></Login>
           </Route>
@@ -48,22 +47,20 @@ function App() {
             <ClientOrder></ClientOrder>
           </PrivateRoute>
           <PrivateRoute path="/clientServiceList">
-          <ClientServiceList></ClientServiceList>
+            <ClientServiceList></ClientServiceList>
           </PrivateRoute>
           <PrivateRoute path="/review">
-          <ClientReview></ClientReview>
+            <ClientReview></ClientReview>
           </PrivateRoute>
-          <Route exact path="/home">
+          <Route path="/home">
             <Home></Home>
           </Route>
-          
           <Route exact path="/">
             <Home></Home>
           </Route>
           <Route exact path="*">
             <NotMatch></NotMatch>
-          </Route>
-
+          </Route>=
         </Switch>
 
       </Router>

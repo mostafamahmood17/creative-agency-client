@@ -4,60 +4,62 @@ import { AgencyContext } from '../../../App';
 import Sidebar from '../../Admin/Sidebar/Sidebar';
 
 const ClientOrder = () => {
-    const {loggedInUser, setLoggedInUser} = useContext(AgencyContext)
+    const { loggedInUser, setLoggedInUser } = useContext(AgencyContext)
     const [orderDetail, setOrderDetail] = useState({});
     const [serviceFind, setServiceFind] = useState({});
-    const {_id} = useParams();
+    const { _id } = useParams();
     const history = useHistory();
-    
-    
+
+
 
     useEffect(() => {
         fetch('http://localhost:5000/services')
             .then(res => res.json())
-            .then(data => {   
+            .then(data => {
                 findService(data)
             })
-            
+
     }, [])
-    
-    const findService = (service) =>{
+
+    const findService = (service) => {
         const job = service.find(serv => serv._id == _id);
         setServiceFind(job)
-        
+
     }
 
 
-    const handleBlur = e => {   
-        const detail = {...orderDetail};
+    const handleBlur = e => {
+        const detail = { ...orderDetail };
         detail[e.target.name] = e.target.value;
         setOrderDetail(detail);
-        
+
     }
 
-    const submitHandler = (e) =>{
+    const submitHandler = (e) => {
         e.preventDefault();
         const email = loggedInUser.email;
         const projectName = serviceFind ? serviceFind.name : orderDetail.projectName;
         const description = serviceFind ? serviceFind.description : orderDetail.description;
-        const newDetail = {...orderDetail, email, projectName, description}
+        const picture = serviceFind ? serviceFind.picture : "https://imgur.com/TYebHDl.png";
+        const status = serviceFind ? serviceFind.status : "pending";
+        const newDetail = { ...orderDetail, email, projectName, description, picture, status }
         console.log(newDetail)
 
-        fetch('http://localhost:5000/orderInfo',{
+        fetch('http://localhost:5000/orderInfo', {
             method: 'POST',
-            headers: {'Content-Type' : 'application/json'},
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(newDetail)
-    })
-    .then(res =>res.json())
-    .then(data => {
-        console.log(data);
-        history.push('/clientServiceList');
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                history.push('/clientServiceList');
 
-    })
+            })
 
-}
+    }
 
-  
+
     return (
         <div>
             <div className="container mt-2">
@@ -66,37 +68,45 @@ const ClientOrder = () => {
                         <Sidebar></Sidebar>
                     </div>
                     <div className="col-lg-8 col-sm-12">
-                    <h1>Order</h1>
-                    <form onSubmit={submitHandler}>
-                        <div className="form-group">
-                            <input onBlur={handleBlur} type="text" className="form-control" name="name" placeholder="Your name / company’s name" required />
-                        </div>
-                        <div className="form-group">
-                            <input type="email" className="form-control" name="email" defaultValue={loggedInUser.email} required/>
-                        </div>
-                        <div className="form-group">
-                        {serviceFind ? 
-                            <input type="text" className="form-control" defaultValue={serviceFind.name} required />
-                            :
-                            <input type="text" onBlur={handleBlur} className="form-control" name="projectName" placeholder="Project Name"  required/>
-                         }
-                        </div>
-                        <div className="form-group">
-                            {serviceFind ?
-                                <input type="text" className="form-control" defaultValue={serviceFind.description} required/>
-                                :
-                                <input type="text" onBlur={handleBlur} className="form-control" name="description" placeholder="description" required/>
-                             }
-                        </div>
-                       
+                        <h1>Order</h1>
+                        <form onSubmit={submitHandler}>
+                            <div className="form-group">
+                                <input onBlur={handleBlur} type="text" className="form-control" name="name" placeholder="Your name / company’s name" required />
+                            </div>
+                            <div className="form-group">
+                                <input type="email" className="form-control" name="email" defaultValue={loggedInUser.email} required />
+                            </div>
+                            <div className="form-group">
+                                {serviceFind ?
+                                    <input type="text" className="form-control" defaultValue={serviceFind.name} required />
+                                    :
+                                    <input type="text" onBlur={handleBlur} className="form-control" name="projectName" placeholder="Project Name" required />
+                                }
+                            </div>
+                            <div className="form-group">
+                                {serviceFind ?
+                                    <input type="text" className="form-control" defaultValue={serviceFind.description} required />
+                                    :
+                                    <input type="text" onBlur={handleBlur} className="form-control" name="description" placeholder="description" required />
+                                }
+                            </div>
+                            {serviceFind &&
+                                <input type="text" className="form-control d-none" defaultValue={serviceFind.picture} />
+                            }
+                            {serviceFind &&
+                                <input type="text" className="form-control d-none" defaultValue={serviceFind.status} />
+                            }
 
-                        <div className="form-group">
-                            <input onBlur={handleBlur} type="text" className="form-control" name="price" placeholder="Price" required/>
-                            <br/>
-                            <input type="file" className="form-control" placeholder="Picture" />
-                        </div>
-                        <button type="submit" className="btn btn-dark text-white pr-5 pl-5">Send</button>
-                    </form>
+
+
+
+                            <div className="form-group">
+                                <input onBlur={handleBlur} type="text" className="form-control" name="price" placeholder="Price" required />
+                                <br />
+                                <input type="file" className="form-control" placeholder="Picture" />
+                            </div>
+                            <button type="submit" className="btn btn-dark text-white pr-5 pl-5">Send</button>
+                        </form>
 
 
 
@@ -106,7 +116,7 @@ const ClientOrder = () => {
                 </div>
             </div>
 
-            
+
         </div>
     );
 };

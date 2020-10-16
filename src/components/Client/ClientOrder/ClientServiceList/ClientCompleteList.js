@@ -6,24 +6,25 @@ const ClientCompleteList = ({ clientList }) => {
 
     return (
        
+         
+			<div className="card m-3 p-3">
+            <div className="p-4">
+                <img src={clientList.picture} height="70" style={{borderRadius:'50%'}} alt="" />
+                
+                    <div style={{backgroundColor:'#FFE3E3', borderRadius:'6px'}} className="p-2 px-4 d-inline-block float-right ml-auto">
+                        <span style={{color:'#FF4545'}}>{clientList.status}</span>
+                    </div>
+                    
+                
+               
 
+                <h5 className="font-weight-bold mt-2">{clientList.name}</h5>
+                <p>{clientList.projectName}</p>
+            </div>
+        </div>
+		
 
-            <div className="col-md-4 my-lg-0 my-3 border border-dark p-1 m-1 rounder">
-				<div>
-					<div className="d-flex justify-content-around">
-						
-							<img width="50px" src="https://imgur.com/fryWcXu.png" alt="" />
-						
-							<p style={{width:"100px", height:"30px",border:'1px solid red', borderRadius:"5px"}} className="text-danger text-center">Pending</p>
-						
-					
-					</div>
-					<div className="mt-2 text-center">
-						<h4>{clientList.name}</h4>
-						<p>{clientList.projectName}</p>
-					</div>
-				</div>
-			</div>
+			
 
 
 
