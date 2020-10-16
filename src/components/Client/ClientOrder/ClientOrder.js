@@ -41,8 +41,8 @@ const ClientOrder = () => {
         const email = loggedInUser.email;
         const projectName = serviceFind ? serviceFind.name : orderDetail.projectName;
         const description = serviceFind ? serviceFind.description : orderDetail.description;
-        const picture = serviceFind ? serviceFind.picture : "https://imgur.com/TYebHDl.png";
-        const status = serviceFind ? serviceFind.status : "pending";
+        const picture = serviceFind && serviceFind.picture;
+        const status = serviceFind && serviceFind.status ;
         const newDetail = { ...orderDetail, email, projectName, description, picture, status }
         console.log(newDetail)
 
