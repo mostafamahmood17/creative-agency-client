@@ -3,9 +3,10 @@ import './Footer.css'
 
 const Footer = () => {
     return (
+        // footer component
         <div className="">
 
-            <footer style={{backgroundColor:"#FBD062"}} className="font-small mt-5">
+            <footer style={{ backgroundColor: "#FBD062" }} className="font-small mt-5">
                 <div className="container text-center text-md-left">
                     <div className="row">
                         <div className="col-md-6 mx-auto">
@@ -16,21 +17,21 @@ const Footer = () => {
                         <div className="col-md-6 m-auto pt-3">
                             <form>
                                 <div className="form-group">
-                                    <input type="email" className="form-control" placeholder="enter your Email"/>
+                                    <input type="email" className="form-control" placeholder="enter your Email" />
                                 </div>
                                 <div className="form-group">
-                                    <input type="name" className="form-control" placeholder="company name"/>
+                                    <input type="name" className="form-control" placeholder="company name" />
                                 </div>
-                                    <div className="form-group">
-                                        <textarea className="form-control" rows="3" placeholder="Your message"></textarea>
-                                    </div>
-                             </form>
+                                <div className="form-group">
+                                    <textarea className="form-control" rows="3" placeholder="Your message"></textarea>
+                                </div>
+                            </form>
                         </div>
 
 
-                        </div>
                     </div>
-                    <div className=" text-center py-3">© {(new Date()).getFullYear()} Copyright: Creative Agency
+                </div>
+                <div className=" text-center py-3">© {(new Date()).getFullYear()} Copyright: Creative Agency
   </div>
             </footer>
         </div>

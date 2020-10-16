@@ -5,8 +5,6 @@ const NotMatch = () => {
     return (
         // no match image
         <div className="image">
-            
-            
         </div>
     );
 };

@@ -3,6 +3,7 @@ import React from 'react';
 const ClientReviewSection = (props) => {
     const { name, Description, companyName, image } = props.reviews;
     return (
+        // review display component
         <div>
             <div className="col-md-4">
                 <div className="card row" style={{  marginLeft: "2px", marginTop: "2px", width: "300px", padding: "4px", height: "200px", maxHeight: "400px" }}>

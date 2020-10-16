@@ -21,7 +21,7 @@ const ServiceWeProvide = ({ ser }) => {
                                
                                 {ser.image ? <img alt="" className="img-fluid" id='pictureOne' src={`data:image/png;base64,${ser.image.img}`} />
                                         :
-                                         <img className="img-fluid"  id='pictureOne' style={{ width: "50px" }} src={`http://localhost:5000/${ser.img}`} alt="" />
+                                         <img className="img-fluid"  id='pictureOne' style={{ width: "50px" }} src={`https://fast-sea-24208.herokuapp.com/${ser.img}`} alt="" />
                                 }
                         </div>
                         <h3>{ser.name}</h3>

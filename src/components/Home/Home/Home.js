@@ -9,9 +9,10 @@ import Services from '../Services/Services';
 import './Home.css'
 
 const Home = () => {
+    // home page component
     return (
         <div className="head">
-            <div className="design">
+           <div className="design">
              <div className="backgroundDesign">
                 <Navbar></Navbar>
                 <Header></Header>
@@ -23,10 +24,6 @@ const Home = () => {
              <Footer></Footer>
 
             </div>
-            
-
-
-
         </div>
     );
 };

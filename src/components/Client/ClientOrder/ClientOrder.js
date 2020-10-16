@@ -4,6 +4,7 @@ import { AgencyContext } from '../../../App';
 import Sidebar from '../../Admin/Sidebar/Sidebar';
 
 const ClientOrder = () => {
+    // make order component
     const { loggedInUser, setLoggedInUser } = useContext(AgencyContext)
     const [orderDetail, setOrderDetail] = useState({});
     const [serviceFind, setServiceFind] = useState({});
@@ -13,7 +14,7 @@ const ClientOrder = () => {
 
 
     useEffect(() => {
-        fetch('http://localhost:5000/services')
+        fetch('https://fast-sea-24208.herokuapp.com/services')
             .then(res => res.json())
             .then(data => {
                 findService(data)
@@ -45,7 +46,7 @@ const ClientOrder = () => {
         const newDetail = { ...orderDetail, email, projectName, description, picture, status }
         console.log(newDetail)
 
-        fetch('http://localhost:5000/orderInfo', {
+        fetch('https://fast-sea-24208.herokuapp.com/orderInfo', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(newDetail)
@@ -61,6 +62,7 @@ const ClientOrder = () => {
 
 
     return (
+        // order form
         <div>
             <div className="container mt-2">
                 <div className="row">
@@ -68,7 +70,14 @@ const ClientOrder = () => {
                         <Sidebar></Sidebar>
                     </div>
                     <div className="col-lg-8 col-sm-12">
-                        <h1>Order</h1>
+                        <div className="d-flex justify-content-between">
+                            <div>
+                                <h3>Dashboard</h3>
+                            </div>
+                            <div>
+                                {loggedInUser && <h3>{loggedInUser.name}</h3>}
+                            </div>
+                        </div>
                         <form onSubmit={submitHandler}>
                             <div className="form-group">
                                 <input onBlur={handleBlur} type="text" className="form-control" name="name" placeholder="Your name / company’s name" required />
@@ -103,9 +112,9 @@ const ClientOrder = () => {
                             <div className="form-group">
                                 <input onBlur={handleBlur} type="text" className="form-control" name="price" placeholder="Price" required />
                                 <br />
-                                <input type="file" className="form-control" placeholder="Picture" />
+                                <input type="file" className="form-control btn btn-outline-success" placeholder="Picture" />
                             </div>
-                            <button type="submit" className="btn btn-dark text-white pr-5 pl-5">Send</button>
+                            <button type="submit" className="btn btn-dark text-white">Send</button>
                         </form>
 
 

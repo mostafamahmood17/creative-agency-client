@@ -3,11 +3,12 @@ import { AgencyContext } from '../../../App';
 import Sidebar from '../Sidebar/Sidebar';
 
 const AdminDashboard = () => {
+    // dashboard / all user and order information
     const { loggedInUser, setLoggedInUser } = useContext(AgencyContext)
 
     const [allOrder, setAllOrder] = useState([])
     useEffect(() => {
-        fetch(`http://localhost:5000/allOrder/${loggedInUser.email}`)
+        fetch(`https://fast-sea-24208.herokuapp.com/allOrder/${loggedInUser.email}`)
             .then(res => res.json())
             .then(data => setAllOrder(data))
     }, [loggedInUser.email])
@@ -16,7 +17,7 @@ const AdminDashboard = () => {
     //     const updateProject = event.target.value
     //     const newStatus = { id, updateProject }
 
-    //     fetch("http://localhost:5000/projectStatus", {
+    //     fetch("https://fast-sea-24208.herokuapp.com/projectStatus", {
     //         method: 'PATCH',
     //         headers: { 'Content-Type': 'application/json' },
     //         body: JSON.stringify(newStatus)
@@ -66,9 +67,9 @@ const AdminDashboard = () => {
 
                                         <td>
                                             <select>
-                                                    <option style={{ color: '#FF4545' }} name="pending"  value="pending" defaultValue id="">Pending</option>
-                                                    <option style={{ color: '#009444' }} name="on going" value="on going" id="">On going</option>
-                                                    <option style={{ color: '#009444' }} name="done" value="done" id="">Done</option>  
+                                                    <option style={{ color: '#FF4545' }} name="pending"  defaultValue="pending"  id="">Pending</option>
+                                                    <option style={{ color: '#009444' }} name="on going" defaultValue="on going" id="">On going</option>
+                                                    <option style={{ color: '#009444' }} name="done" defaultValue="done" id="">Done</option>  
                                             </select>
                                         </td>
                                     </tr>

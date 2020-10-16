@@ -6,6 +6,7 @@ import picFour from '../../../images/carousel-4.png';
 import picFive from '../../../images/carousel-5.png';
 
 const CarouselSection = () => {
+    // moving carousel component
     return (
         <div className="mt-5 d-flex justify-content-center bg-dark pb-5">
             

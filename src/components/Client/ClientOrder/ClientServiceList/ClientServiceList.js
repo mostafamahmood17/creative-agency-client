@@ -4,11 +4,12 @@ import Sidebar from '../../../Admin/Sidebar/Sidebar';
 import ClientCompleteList from './ClientCompleteList';
 
 const ClientServiceList = () => {
-    const {loggedInUser, setLoggedInUser} = useContext(AgencyContext)
+    // client order list main component
+    const { loggedInUser, setLoggedInUser } = useContext(AgencyContext)
 
     const [clientOrder, setClientOrder] = useState([])
     useEffect(() => {
-        fetch(`http://localhost:5000/order/${loggedInUser.email}`)
+        fetch(`https://fast-sea-24208.herokuapp.com/order/${loggedInUser.email}`)
             .then(res => res.json())
             .then(data => setClientOrder(data))
     }, [loggedInUser.email])
@@ -22,14 +23,21 @@ const ClientServiceList = () => {
                         <Sidebar></Sidebar>
                     </div>
                     <div className="col-lg-9 col-sm-12">
-                        <h1>Your Services</h1>
+                        <div className="d-flex justify-content-between">
+                            <div>
+                                <h3>Dashboard</h3>
+                            </div>
+                            <div>
+                                {loggedInUser && <h3>{loggedInUser.name}</h3>}
+                            </div>
+                        </div>
 
                         <div className="">
 
-                        {
-                            clientOrder.map(clientList => <ClientCompleteList key={Math.random()} clientList={clientList}></ClientCompleteList>)
-                        }
-                            
+                            {
+                                clientOrder.map(clientList => <ClientCompleteList key={Math.random()} clientList={clientList}></ClientCompleteList>)
+                            }
+
                         </div>
                     </div>
                 </div>

@@ -7,6 +7,7 @@ import { AgencyContext } from '../../App';
 import logo from '../../images/logos/logo.png';
 
 const Login = () => {
+    // login component
     const {loggedInUser, setLoggedInUser} = useContext(AgencyContext);
     const history = useHistory();
     const location = useLocation();

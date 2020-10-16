@@ -4,6 +4,7 @@ import { AgencyContext } from '../../App';
 
 
 const PrivateRoute = ({ children, ...rest }) => {
+    // privateRoute component
     const {loggedInUser, setLoggedInUser} = useContext(AgencyContext)
     return (
         <Route
