@@ -41,9 +41,9 @@ const ClientOrder = () => {
         const email = loggedInUser.email;
         const projectName = serviceFind ? serviceFind.name : orderDetail.projectName;
         const description = serviceFind ? serviceFind.description : orderDetail.description;
-        const picture = serviceFind && serviceFind.picture;
-        const status = serviceFind && serviceFind.status ;
-        const newDetail = { ...orderDetail, email, projectName, description, picture, status }
+        // const picture = serviceFind ? serviceFind.picture : "https://imgur.com/TYebHDl.png";
+        // const status = serviceFind ? serviceFind.status : "pending";
+        const newDetail = { ...orderDetail, email, projectName, description }
         console.log(newDetail)
 
         fetch('https://fast-sea-24208.herokuapp.com/orderInfo', {
@@ -99,13 +99,8 @@ const ClientOrder = () => {
                                     <input type="text" onBlur={handleBlur} className="form-control" name="description" placeholder="description" required />
                                 }
                             </div>
-                            {serviceFind &&
-                                <input type="text" className="form-control d-none" defaultValue={serviceFind.picture} />
-                            }
-                            {serviceFind &&
-                                <input type="text" className="form-control d-none" defaultValue={serviceFind.status} />
-                            }
-
+                            
+                                
 
 
 
