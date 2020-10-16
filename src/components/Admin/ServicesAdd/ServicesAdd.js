@@ -7,7 +7,7 @@ const ServicesAdd = () => {
     // services add component
     const [info, setInfo] = useState({});
     const [file, setFile] = useState(null);
-    const {loggedInUser, setLoggedInUser} = useContext(AgencyContext);
+    const { loggedInUser, setLoggedInUser } = useContext(AgencyContext);
 
     const handleBlur = (e) => {
         const newInfo = { ...info };
@@ -30,21 +30,21 @@ const ServicesAdd = () => {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        // const doc = document.getElementById("status").value;
-        // const pic = document.getElementById("pic").value
-        // console.log(pic)
+        const doc = document.getElementById("status").value;
+        const pic = document.getElementById("pic").value
+        console.log(pic)
 
 
         const formData = new FormData()
         formData.append('file', file)
         formData.append('name', info.name)
         formData.append('description', info.description)
-        // formData.append('upd', doc)
-        // formData.append('pict', pic)
+        formData.append('upd', doc)
+        formData.append('pict', pic)
 
 
 
-        fetch('https://fast-sea-24208.herokuapp.com/addServices', {
+        fetch('http://localhost:5000/addServices', {
             method: 'POST',
             body: formData
 
@@ -91,9 +91,9 @@ const ServicesAdd = () => {
                                         <input name="file" onBlur={handleBlur} style={inputStyle} type="text" id="description" placeholder="description" name="description" required />
 
                                     </div>
-                                    {/* <input className="d-none" type="text" id="status" defaultValue="pending" name="upd" required /> */}
+                                    <input className="d-none" type="text" id="status" defaultValue="pending" name="upd" required />
 
-                                    {/* <input className="d-none" type="text" id="pic" defaultValue="https://imgur.com/8Y2reg0.png" name="pict" required /> */}
+                                    <input className="d-none" type="text" id="pic" defaultValue="https://imgur.com/8Y2reg0.png" name="pict" required />
 
                                 </div>
                                 <div className="col">

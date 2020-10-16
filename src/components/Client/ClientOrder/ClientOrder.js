@@ -14,7 +14,7 @@ const ClientOrder = () => {
 
 
     useEffect(() => {
-        fetch('https://fast-sea-24208.herokuapp.com/services')
+        fetch('http://localhost:5000/services')
             .then(res => res.json())
             .then(data => {
                 findService(data)
@@ -41,12 +41,12 @@ const ClientOrder = () => {
         const email = loggedInUser.email;
         const projectName = serviceFind ? serviceFind.name : orderDetail.projectName;
         const description = serviceFind ? serviceFind.description : orderDetail.description;
-        // const picture = serviceFind ? serviceFind.picture : "https://imgur.com/TYebHDl.png";
-        // const status = serviceFind ? serviceFind.status : "pending";
-        const newDetail = { ...orderDetail, email, projectName, description }
+        const picture = serviceFind ? serviceFind.picture : "https://imgur.com/TYebHDl.png";
+        const status = serviceFind ? serviceFind.status : "pending";
+        const newDetail = { ...orderDetail, email, projectName, description, picture, status}
         console.log(newDetail)
 
-        fetch('https://fast-sea-24208.herokuapp.com/orderInfo', {
+        fetch('http://localhost:5000/orderInfo', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(newDetail)
@@ -99,10 +99,12 @@ const ClientOrder = () => {
                                     <input type="text" onBlur={handleBlur} className="form-control" name="description" placeholder="description" required />
                                 }
                             </div>
-                            
-                                
-
-
+                            {serviceFind &&
+                                <input type="text" className="form-control d-none" defaultValue={serviceFind.picture} />
+                            }
+                            {serviceFind &&
+                                <input type="text" className="form-control d-none" defaultValue={serviceFind.status} />
+                            }
 
                             <div className="form-group">
                                 <input onBlur={handleBlur} type="text" className="form-control" name="price" placeholder="Price" required />
