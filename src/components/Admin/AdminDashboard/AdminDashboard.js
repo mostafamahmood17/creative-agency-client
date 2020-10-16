@@ -8,7 +8,7 @@ const AdminDashboard = () => {
 
     const [allOrder, setAllOrder] = useState([])
     useEffect(() => {
-        fetch(`http://localhost:5000/allOrder/${loggedInUser.email}`)
+        fetch(`https://fast-sea-24208.herokuapp.com/allOrder/${loggedInUser.email}`)
             .then(res => res.json())
             .then(data => setAllOrder(data))
     }, [loggedInUser.email])
@@ -17,7 +17,7 @@ const AdminDashboard = () => {
     //     const updateProject = event.target.value
     //     const newStatus = { id, updateProject }
 
-    //     fetch("http://localhost:5000/projectStatus", {
+    //     fetch("https://fast-sea-24208.herokuapp.com/projectStatus", {
     //         method: 'PATCH',
     //         headers: { 'Content-Type': 'application/json' },
     //         body: JSON.stringify(newStatus)

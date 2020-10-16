@@ -21,7 +21,7 @@ const ClientReview = () => {
         const newDoc = { ...info, name, image };
 
 
-        fetch('http://localhost:5000/addReviews', {
+        fetch('https://fast-sea-24208.herokuapp.com/addReviews', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(newDoc)

@@ -17,7 +17,7 @@ const AddAdmin = () => {
         e.preventDefault();
         const newAdminEmail = {...admin};
          
-        fetch('http://localhost:5000/createAdmin',{
+        fetch('https://fast-sea-24208.herokuapp.com/createAdmin',{
             method: 'POST',
             headers: {'Content-Type' : 'application/json'},
             body: JSON.stringify(newAdminEmail)

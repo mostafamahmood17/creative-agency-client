@@ -9,7 +9,7 @@ const ClientServiceList = () => {
 
     const [clientOrder, setClientOrder] = useState([])
     useEffect(() => {
-        fetch(`http://localhost:5000/order/${loggedInUser.email}`)
+        fetch(`https://fast-sea-24208.herokuapp.com/order/${loggedInUser.email}`)
             .then(res => res.json())
             .then(data => setClientOrder(data))
     }, [loggedInUser.email])

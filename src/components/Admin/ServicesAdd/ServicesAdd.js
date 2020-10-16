@@ -44,7 +44,7 @@ const ServicesAdd = () => {
 
 
 
-        fetch('http://localhost:5000/addServices', {
+        fetch('https://fast-sea-24208.herokuapp.com/addServices', {
             method: 'POST',
             body: formData
 
