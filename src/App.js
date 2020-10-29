@@ -14,6 +14,8 @@ import Home from './components/Home/Home/Home';
 import Login from './components/Login/Login';
 import NotMatch from './components/NotMatch/NotMatch';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 
 export const AgencyContext = createContext();

@@ -14,7 +14,7 @@ const ClientOrder = () => {
 
 
     useEffect(() => {
-        fetch('https://fast-sea-24208.herokuapp.com/services')
+        fetch('http://localhost:5000/services')
             .then(res => res.json())
             .then(data => {
                 findService(data)
@@ -46,7 +46,7 @@ const ClientOrder = () => {
         const newDetail = { ...orderDetail, email, projectName, description, picture, status}
         console.log(newDetail)
 
-        fetch('https://fast-sea-24208.herokuapp.com/orderInfo', {
+        fetch('http://localhost:5000/orderInfo', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(newDetail)
